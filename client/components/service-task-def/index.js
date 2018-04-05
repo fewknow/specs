@@ -41,7 +41,13 @@ export default class ServiceTaskDef extends Component {
               <td>
                 <ul className={styles.ServiceTaskDefEnvVars}>
                   {definition.environment.map(({ name, value }) =>
-                    <li key={`__${family}_${revision}_env_${name}`}><code>{name}={value}</code></li>
+                    {
+                      if(name.includes("TOKEN")){
+                        return <li key={`__${family}_${revision}_env_${name}`}><code>{name}="REDACTED"</code></li>;
+                      }else{
+                        return <li key={`__${family}_${revision}_env_${name}`}><code>{name}={value}</code></li>;
+                      }
+                    }
                   )}
                 </ul>
               </td>
