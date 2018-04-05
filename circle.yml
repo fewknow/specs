@@ -22,11 +22,7 @@ deployment:
     commands:
       # Authenticate to ECR
       - pip install awscli
-      - $(aws ecr get-login --region $AWS_REGION)
-
-      - docker login -e $DOCKER_EMAIL -u $DOCKER_USER -p $DOCKER_PASS
-      - docker build -t segment/specs .
-      - docker push segment/specs:latest
+      - aws ecr get-login --no-include-email --region $AWS_REGION | /bin/bash
 
       - docker tag corvesta/specs:latest $AWS_ACCOUNT_ID.dkr.ecr.$AWS_REGION.amazonaws.com/corvesta-specs:latest
       - docker push $AWS_ACCOUNT_ID.dkr.ecr.$AWS_REGION.amazonaws.com/corvesta-specs:latest
