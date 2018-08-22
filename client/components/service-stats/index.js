@@ -9,6 +9,7 @@ export default class ServiceStats extends Component {
     const { service } = this.props;
     const { runningCount, desiredCount } = service;
     const { image } = service.task.containerDefinitions[0];
+    const { commit } = service.task.containerDefinitions[0].substring(service.task.containerDefinitions[0].indexOf('/'));
     const date = moment(service.deployments[0].updatedAt)
     const updatedAgo = date.fromNow();
     const updatedIso = date.toISOString();
