@@ -28,7 +28,7 @@ export default class ServiceStats extends Component {
               <td title={image}>{repository}</td>
             </tr>
             <tr>
-              <th>Commit</th>
+              <th>Tag</th>
               <td title={commit}>{commit}</td>
             </tr>
             <tr>
