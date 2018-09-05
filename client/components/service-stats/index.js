@@ -9,7 +9,9 @@ export default class ServiceStats extends Component {
     const { service } = this.props;
     const { runningCount, desiredCount } = service;
     const { image } = service.task.containerDefinitions[0];
-    const { commit } = service.task.containerDefinitions[0].image.substring(this.props.service.task.containerDefinitions[0].image.indexOf(':')+1);
+    const repository = this.props.service.task.containerDefinitions[0].image.substring(0,this.props.service.task.containerDefinitions[0].image.indexOf(':'));
+    //const { commit } = service.task.containerDefinitions[0].image.substring(this.props.service.task.containerDefinitions[0].image.indexOf(':')+1);
+    const commit = this.props.service.task.containerDefinitions[0].image.substring(this.props.service.task.containerDefinitions[0].image.indexOf(':')+1);
     const date = moment(service.deployments[0].updatedAt);
     const updatedAgo = date.fromNow();
     const updatedIso = date.toISOString();
@@ -23,7 +25,7 @@ export default class ServiceStats extends Component {
           <tbody>
             <tr>
               <th>Image</th>
-              <td title={image}>{image}</td>
+              <td title={image}>{repository}</td>
             </tr>
             <tr>
               <th>Commit</th>
